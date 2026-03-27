@@ -102,3 +102,29 @@
 
   document.head.appendChild(script);
 })();
+
+// ==================== NAVIGATION CARDS STATISTIQUES ====================
+(function setupStatCardNavigation() {
+  const mapCheck = (label) => {
+    if (!label) return null;
+    const l = label.toLowerCase();
+    if (l.includes('projet')) return '#projects';
+    if (l.includes('technolog')) return '#skills';
+    if (l.includes("ans") || l.includes('expérience')) return '#about';
+    if (l.includes('contact')) return '#contact';
+    return null;
+  };
+
+  document.querySelectorAll('.stat-card').forEach((card) => {
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', () => {
+      const labelEl = card.querySelector('.stat-label');
+      const label = labelEl ? labelEl.textContent.trim() : '';
+      const target = mapCheck(label);
+      if (!target) return;
+      const dest = document.querySelector(target);
+      if (dest) dest.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      else window.location.hash = target;
+    });
+  });
+})();

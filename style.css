@@ -24,6 +24,14 @@
   /* Bordures */
   --border-radius: 8px;
   --border-radius-lg: 12px;
+
+  /* 1. Définition des couleurs par défaut (Mode Clair) */
+  --bg-main: #f4f7f6;        /* Fond de la page */
+  --bg-sidebar: #009688;     /* Ta sidebar verte actuelle */
+  --text-main: #333333;      /* Texte foncé */
+  --card-bg: #ffffff;        /* Fond des cartes projets */
+  --text-muted: #666666;
+  --border-color: #eeeeee;
 }
 
 /* ==================== RESET ==================== */
@@ -43,11 +51,20 @@ body {
   line-height: 1.6;
   color: var(--dark-gray);
   background-color: var(--light-gray);
+  transition: all 0.3s ease; /* Pour un passage fluide au noir */
 }
 
 body.dark-mode {
   background-color: #020617;
   color: #e5e7eb;
+
+  /* 2. Définition des couleurs pour le Mode Sombre */
+  --bg-main: #121212;        /* Fond noir profond */
+  --bg-sidebar: #0a0a0a;     /* Sidebar encore plus sombre */
+  --text-main: #e0e0e0;      /* Texte clair */
+  --card-bg: #1e1e1e;        /* Cartes grises foncées */
+  --text-muted: #b0b0b0;
+  --border-color: #333333;
 }
 
 /* ==================== CONTENEUR PRINCIPAL (STYLE CV) ==================== */
@@ -70,6 +87,8 @@ body.dark-mode {
   top: 0;
   height: 100vh;
   overflow-y: auto;
+
+  background-color: var(--bg-sidebar);
 }
 
 /* Scrollbar sidebar */
@@ -532,11 +551,19 @@ body.dark-mode .project-filter-btn:hover {
   background: var(--light-gray);
   border-radius: var(--border-radius-lg);
   transition: all 0.3s ease;
+
+  background-color: var(--card-bg);
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
 }
 
 .stat-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.stat-card {
+  cursor: pointer;
 }
 
 .stat-card i {
@@ -570,6 +597,10 @@ body.dark-mode .project-filter-btn:hover {
   border-radius: var(--border-radius-lg);
   padding: var(--spacing-xl);
   transition: all 0.3s ease;
+
+  background-color: var(--card-bg);
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
 }
 
 .project-card:hover {
@@ -706,6 +737,10 @@ body.dark-mode .project-filter-btn:hover {
   border: 2px solid var(--light-gray);
   border-radius: var(--border-radius-lg);
   padding: var(--spacing-lg);
+
+  background-color: var(--card-bg);
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
 }
 
 .category-title {
@@ -966,6 +1001,10 @@ body.dark-mode .project-filter-btn:hover {
   background: var(--light-gray);
   border-radius: var(--border-radius-lg);
   transition: all 0.3s ease;
+
+  background-color: var(--card-bg);
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
 }
 
 .contact-card:hover {
@@ -1157,4 +1196,51 @@ body.dark-mode .project-filter-btn:hover {
   .profile-image i {
     font-size: 4rem;
   }
+}
+
+/* Désactiver les effets au survol sur les "carrés" (cartes, skill-box, interest-item) */
+.project-card:hover,
+.project-card.featured:hover,
+.stat-card:hover,
+.contact-card:hover,
+.skill-box:hover,
+.interest-item:hover,
+.project-filter-btn:hover {
+  transform: none !important;
+  box-shadow: none !important;
+  /* remettre la bordure par défaut si elle changeait au hover */
+  border-color: var(--border-color) !important;
+  /* éviter tout changement de background */
+  background-image: none !important;
+  background: inherit !important;
+}
+
+/* au cas où des transitions provoqueraient un mouvement résiduel */
+.project-card,
+.stat-card,
+contact-card,
+.skill-box,
+.interest-item {
+  transition: none !important;
+}
+
+/* rendre les stat-card clairement cliquables et neutraliser hover */
+.stat-card {
+  cursor: pointer;
+}
+.stat-card:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+/* si tu veux le même comportement pour d'autres "carrés" : .contact-card, .skill-box, .project-card */
+.contact-card,
+.skill-box,
+.project-card {
+  transition: none !important;
+}
+.contact-card:hover,
+.skill-box:hover,
+.project-card:hover {
+  transform: none !important;
+  box-shadow: none !important;
 }
